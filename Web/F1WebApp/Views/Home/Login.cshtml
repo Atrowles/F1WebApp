@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+    <div class="col-md-8 col-md-offset-2">
+
+        <!--use v cloak to hide things until its bound properly-->
+        <div id="loading">
+            <img src="~/img/spinner.gif" />
+        </div>
+
+        <div class="well">
+            You are attempting to access a secure resource.  Please login to continue.<br /><br />
+            If you do not have an account  <a href="https://capitaauth.azurewebsites.net/home/register?returnUrl=@Context.Request.Host@Context.Request.Path">please click here</a><br />
+            Can't remember your password? <a href="https://capitaauth.azurewebsites.net/home/ResetPassword/">please click here</a><br /><br />
+            <div><div id="login-error" class="alert alert-danger" role="alert">Username or Password is incorrect!</div></div>
+        </div>
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">
+                Secure Login
+            </div>
+            <div class="panel-body">
+                <div class="form-group row">
+                    <div for="Email" class="col-md-3 control-label">Email</div>
+                    <div class="col-md-8">
+                        <input class="form-control" type="text" placeholder="Email" id="email" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div for="Password" class="col-md-3 control-label">Password</div>
+                    <div class="col-md-8"><input class="form-control" type="password" placeholder="Password" id="password" /></div>
+                </div>
+            </div>
+            <div class="panel-footer">
+
+                <button type="button" class="btn btn-primary" id="login">Login</button> <!--hook this up to login function in security context. when done properly this should really all be a vue function-->
+            </div>
+        </div>
+    </div>
+
+@section scripts
+{
+    <script>
+
+            require.config({
+                baseUrl: "/js"
+            });
+
+            require(["Common/SecurityContext"],
+                function (v) {
+
+                }
+            );
+    </script>
+}

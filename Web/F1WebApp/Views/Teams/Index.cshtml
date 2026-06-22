@@ -1,0 +1,101 @@
+﻿
+
+@{
+    ViewData["Title"] = "Teams Page";
+}
+
+
+
+    <div class="text-center">
+
+
+        <div class="row">
+            <div class="col-lg-12 marginbottom  text-right">
+                <a asp-controller="Teams" asp-action="Add">
+                    <button class="btn-primary" style="width:100px">Add Team</button>
+                </a>
+
+                <input type="text" id="txtSearch" name="search" />
+                <button class="btn-primary" id="btnRefresh"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+        <div id="vueTable" v-cloak>
+            <div id="loading" v-if="showLoading">
+                <img src="~/img/spinner.gif" />
+            </div>
+
+            <div v-if="showGrid">
+                <table>
+                    <thead>
+                        <tr>
+                            <th v-for="col in columns" v-on:click="sortTable(col)">
+                                {{col}}
+                                <div class="arrow" v-if="col == sortColumn" v-bind:class="[ascending ? 'arrow_up' : 'arrow_down']"></div>
+                            </th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="row in get_rows()">
+                            <td v-for="col in columns">{{row[col]}}</td>
+                            <td style="text-align: center;">
+                                <button class="btn-primary" v-on:click="updateRow(row)"><i class="fas fa-edit"></i></button>
+                                <button class="btn-primary" v-on:click="deleteTeam(row)"><i class="fas fa-trash-alt"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--<div class="pagination">
+                    <div class="number" v-on:click="change_page(1)" v-if="isShownFirst"><<</div>
+                    <div class="number" v-on:click="prev_page()" v-if="isShownFirst"><</div>
+                    <div class="number"
+                         v-for="value in pagination_range"
+                         v-bind:class="[value  == currentPage ? 'active' : '']"
+                         v-on:click="change_page(value)">{{value}}</div>
+                    <div class="number" v-on:click="next_page()" v-if="isShownLast">></div>
+                    <div class="number" v-on:click="max_page()" v-if="isShownLast">>></div>
+
+                </div>-->
+                <div class="row">
+                    <div class="col-lg-12 marginbottom  text-right">
+                        Items Per Page <select id="sel-team-items-per-page" v-model="elementsPerPage">
+                            <option v-for="item in pageItems" :value="item.val" :key="item.id">
+                                {{ item.val }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div v-else>
+                No Data
+            </div>
+
+        </div>
+
+        <div id="pager">
+            <ul id="pagination-demo" class="pagination-sm"></ul>
+        </div>
+
+    </div>
+
+<!--this bit here is so we only load in what we need on each page. So this will only load in test vue-->
+<!--but it will also load in whaterver was defined in main, which in this case is the APIConfig-->
+@section scripts
+{
+    <script>
+
+                   require.config({
+                   baseUrl: "/js"
+                    });
+
+                    require(["VueScripts/teams/teamScript"],
+                        function (v) {
+
+                        }
+                    );
+    </script>
+}
+
+

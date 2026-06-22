@@ -1,0 +1,92 @@
+﻿
+<h1>Edit Team</h1>
+<div id="addEditTeamBinding" class="rcorners" v-cloak>
+
+    <div id="loading" v-if="showLoading">
+        <img src="~/img/spinner.gif" />
+    </div>
+    <div class="row">
+        <div class="col-lg-12 marginbottom  text-left">
+            <b>Team Id:{{team.id}}</b>
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="nameError" class="validation-error">! Invalid Name Value</span>
+        </div>
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="engineError" class="validation-error">! Invalid Engine Value</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Name: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="text" v-model="team.name" />
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Engine: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="text" v-model="team.engine" />
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div class="col-lg-6 marginbottom  text-left">
+
+        </div>
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="currentPointsError" class="validation-error">! Invalid Current Points Value</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Customer Engine: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <span class="radio-item">
+                <input type="radio" id="ritema" name="ritem" value="Yes" checked v-model="picked">
+                <label for="ritema">Yes </label>
+            </span>
+            &nbsp;
+            <span class="radio-item">
+                <input type="radio" id="ritemb" name="ritem" value="No" v-model="picked">
+                <label for="ritemb">No</label>
+            </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Current Points: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="number" v-model="team.currentPoints" />
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12 marginbottom  text-left"><button v-on:click="validateTeam" class="btn-primary" id="btn_update">Update</button></div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        var teamId = @ViewData["Id"];
+
+        require.config({
+           baseUrl: "/js"
+        });
+
+        require(["VueScripts/Teams/AddEditTeam"],
+                        function (v) {
+
+                        }
+       );
+    </script>
+}

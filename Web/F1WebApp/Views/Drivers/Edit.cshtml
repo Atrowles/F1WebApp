@@ -1,0 +1,114 @@
+﻿
+<h1>Edit Driver</h1>
+<div id="addEditDriverBinding" class="rcorners" v-cloak>
+
+    <div id="loading" v-if="showLoading">
+        <img src="~/img/spinner.gif" />
+    </div>
+    <div class="row">
+        <div class="col-lg-12 marginbottom  text-left">
+            <b>Driver Id:{{driver.id}}</b>
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="nameError" class="validation-error">! Invalid Name Value</span>
+        </div>
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="teamIdError" class="validation-error">! Invalid Team Name Value</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Name: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="text" v-model="driver.name" />
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Team : </span>
+        </div>
+     
+        <div class="col-lg-3 marginbottom  text-left">
+            <select id="sel-teams" v-model="driver.teamId">
+                <option v-for="item in teams" :value="item.id">
+                    {{ item.name }}
+                </option>
+            </select>
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="polesError" class="validation-error">! Invalid Poles Value</span>
+        </div>
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="raceWinsError" class="validation-error">! Invalid Race Wins Value</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Poles: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="number" v-model="driver.poles" />
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Race Wins: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="number" v-model="driver.raceWins" />
+        </div>
+    </div>
+    </br>
+    <div class="row">
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="championshipsError" class="validation-error">! Invalid Championships Value</span>
+        </div>
+        <div  class="col-lg-6 marginbottom  text-left">
+            <span v-if="currentPointsError" class="validation-error">! Invalid Current Points Value</spanv-if="currentPointsError">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Championships: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="number" v-model="driver.championships" />
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <span>Current Points: </span>
+        </div>
+        <div class="col-lg-3 marginbottom  text-left">
+            <input type="number" v-model="driver.currentPoints" />
+        </div>
+    </div>
+    </br>
+
+
+
+
+
+    <div class="row">
+        <div class="col-lg-12 marginbottom  text-left"><button v-on:click="validateDriver" class="btn-primary" id="btn_update">Update</button></div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        var driverId = @ViewData["Id"];
+
+        require.config({
+           baseUrl: "/js"
+        });
+
+        require(["VueScripts/Drivers/AddEditDriver"],
+                        function (v) {
+
+                        }
+       );
+    </script>
+}

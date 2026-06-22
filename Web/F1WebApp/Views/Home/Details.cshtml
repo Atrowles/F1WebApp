@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Details Page";
+}
+<h1>Race Result</h1>
+<div class="text-center">
+
+    <div id="driverResultsBinding" v-cloak>
+        <!--use v cloak to hide things until its bound properly-->
+        <div id="loading" v-if="showLoading">
+            <img src="~/img/spinner.gif" />
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 marginbottom  text-left">
+                <label class="details-label">Track: </label>
+                <label class="details-label-info">{{trackData.trackName}}</label>
+            </div>
+            <div class="col-lg-6 marginbottom  text-left">
+                <label class="details-label">Pole: </label>
+                <label class="details-label-info">{{trackData.pole}}</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 marginbottom  text-left">
+                <label class="details-label">Fastest Lap: </label>
+                <label class="details-label-info">{{trackData.fastestLap}}</label>
+            </div>
+            <div class="col-lg-6 marginbottom  text-left">
+                <label class="details-label">Race Date: </label>
+                <label class="details-label-info">{{trackData.raceDate}}</label>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+            <th>Position</th>
+            <th>Driver</th>
+            <th>Gap</th>
+            </thead>
+            <tbody>
+                <tr v-for="driver in driverData">
+                    <td>{{driver.position}}</td>
+                    <td>{{driver.driverName}}</td>
+                    <td>{{driver.gap}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+</div>
+
+@section scripts
+{
+    <script>
+
+            var raceId = @ViewData["Id"];
+            require.config({
+                baseUrl: "/js"
+            });
+
+            require(["VueScripts/driverResults/driverResultScript"],
+                function (v) {
+
+                }
+            );
+    </script>
+}
+
+

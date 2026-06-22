@@ -1,0 +1,77 @@
+﻿@using F1WebApp.Utillities
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - F1WebApp</title>
+    <!--All these are deinfed in the loginlayout so probably could be removed form here as long as we know the login page will always be hit-->
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.0-alpha.3/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/img/car.png" height="120" width="120" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <!--this calls the helper class in the utils folder to set the active class-->
+                        <li class='@Html.IsActive("Home", "Index")'>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class='@Html.IsActive("Tracks", "Index")'>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Tracks" asp-action="Index">Tracks</a>
+                        </li>
+                        <li class='@Html.IsActive("Drivers", "Index")'>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Drivers" asp-action="Index">Drivers</a>
+                        </li>
+                        <li class='@Html.IsActive("Teams", "Index")'>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Teams" asp-action="Index">Teams</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - F1WebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="~/js/Common/toastrConfig.js"></script><!--these should be in the bundle config.jconfig.json file rather than here-->
+    <script src="~/lib/vue/vue.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vuetify/1.0.0-alpha.3/vuetify.min.js"></script>
+    <script src="https://cdn.tutorialjinni.com/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+    <!--link in vee-validate so we can validate forms-->
+    <script src="https://unpkg.com/vee-validate@2.0.0-rc.25/dist/vee-validate.js"></script>
+    <!--<script data-main="js/main" src="~/lib/require/require.js"></script>-->
+    <script src="~/lib/require/require.js"></script>
+
+
+
+    @RenderSection("Scripts", required: false)
+
+
+
+</body>
+</html>
